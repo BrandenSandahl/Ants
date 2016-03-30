@@ -36,7 +36,7 @@ public class Main extends Application {
     void drawAnts(GraphicsContext context) {
         context.clearRect(0, 0, WIDTH, HEIGHT);
         for (Ant ant : ants) {
-            context.setFill(Color.BLACK);
+            context.setFill(ant.color);
             context.fillOval(ant.x, ant.y, 5, 5);
         }
     }
@@ -53,6 +53,14 @@ public class Main extends Application {
         }
         ant.x += randomStep();
         ant.y += randomStep();
+
+        long count = ants.parallelStream()
+                     .filter(ant1 -> {
+                         double diff = (ant.x + ant.y) - (ant1.x + ant1.y);
+                         return Math.abs(diff) <= 10;
+                     })
+                     .count();
+        ant.color = (((int) count) > 1) ? Color.RED : Color.BLACK;
         return ant;
     }
 
