@@ -13,7 +13,6 @@ public class Ant {
    // Image image = new Image("tinyAnt.png");
 
 
-
     public Ant(double x, double y) {
         this.x = x;
         this.y = y;

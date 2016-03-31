@@ -53,15 +53,18 @@ public class Main extends Application {
         }
         ant.x += randomStep();
         ant.y += randomStep();
+        return ant;
+    }
 
+    Ant aggravateAnt(Ant ant) {
         long count = ants.parallelStream()
-                     .filter(ant1 -> {
-                         double x = (ant.x - ant1.x);
-                         double y = (ant.y - ant1.y);
-                         double diff = Math.sqrt(Math.pow(x, 2) + (Math.pow(y, 2)));
-                         return Math.abs(diff) <= 10;
-                     })
-                     .count();
+                .filter(ant1 -> {
+                    double x = (ant.x - ant1.x);
+                    double y = (ant.y - ant1.y);
+                    double diff = Math.sqrt(Math.pow(x, 2) + (Math.pow(y, 2)));
+                    return Math.abs(diff) <= 10;
+                })
+                .count();
         ant.color = (((int) count) > 1) ? Color.RED : Color.BLACK;
         return ant;
     }
@@ -69,6 +72,7 @@ public class Main extends Application {
     void updateAnts() {
         ants = ants.parallelStream()
                 .map(this::moveAnt)
+                .map(this::aggravateAnt)
                 .collect(Collectors.toCollection(ArrayList<Ant>::new));
     }
 
