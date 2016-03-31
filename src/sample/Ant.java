@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -9,6 +10,7 @@ public class Ant {
     double x;
     double y;
     Color color;
+   // Image image = new Image("tinyAnt.png");
 
 
 

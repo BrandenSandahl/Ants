@@ -56,7 +56,9 @@ public class Main extends Application {
 
         long count = ants.parallelStream()
                      .filter(ant1 -> {
-                         double diff = (ant.x + ant.y) - (ant1.x + ant1.y);
+                         double x = (ant.x - ant1.x);
+                         double y = (ant.y - ant1.y);
+                         double diff = Math.sqrt(Math.pow(x, 2) + (Math.pow(y, 2)));
                          return Math.abs(diff) <= 10;
                      })
                      .count();
